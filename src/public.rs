@@ -154,10 +154,11 @@ impl KeybdKey {
             .insert(self, Bind::BlockableBind(Arc::new(callback)));
     }
 
-    pub fn bind_all<F: Fn(KeybdKey) + Send + Sync + Copy + 'static>(callback: F) {
+    pub fn bind_all<F: Fn(KeybdKey) + Send + Sync + Clone + 'static>(callback: F) {
         for key in KeybdKey::iter() {
+            let c2 = callback.clone();
             let fire = move || {
-                callback(key);
+                c2(key);
             };
 
             KEYBD_BINDS
@@ -194,10 +195,11 @@ impl MouseButton {
             .insert(self, Bind::BlockableBind(Arc::new(callback)));
     }
 
-    pub fn bind_all<F: Fn(MouseButton) + Send + Sync + Copy + 'static>(callback: F) {
+    pub fn bind_all<F: Fn(MouseButton) + Send + Sync + Clone + 'static>(callback: F) {
         for btn in MouseButton::iter() {
+            let c2 = callback.clone();
             let fire = move || {
-                callback(btn);
+                c2(btn);
             };
 
             MOUSE_BINDS
