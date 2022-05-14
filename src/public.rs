@@ -1,5 +1,6 @@
 use crate::common::*;
 use std::{thread::sleep, time::Duration};
+use serde::{Serialize, Deserialize};
 
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
@@ -9,7 +10,7 @@ pub enum BlockInput {
     DontBlock,
 }
 
-#[derive(Debug, Eq, PartialEq, Hash, Copy, Clone, EnumIter)]
+#[derive(Debug, Eq, PartialEq, Hash, Copy, Clone, EnumIter, Serialize, Deserialize)]
 pub enum KeybdKey {
     BackspaceKey,
     TabKey,
@@ -116,7 +117,7 @@ pub enum KeybdKey {
     OtherKey(u64),
 }
 
-#[derive(Debug, Eq, PartialEq, Hash, Copy, Clone, EnumIter)]
+#[derive(Debug, Eq, PartialEq, Hash, Copy, Clone, EnumIter, Serialize, Deserialize)]
 pub enum MouseButton {
     LeftButton,
     MiddleButton,
