@@ -17,6 +17,9 @@ pub enum KeybdKey {
     EnterKey,
     EscapeKey,
     SpaceKey,
+    PageUpKey,
+    PageDownKey,
+    EndKey,
     HomeKey,
     LeftKey,
     UpKey,
@@ -60,6 +63,8 @@ pub enum KeybdKey {
     XKey,
     YKey,
     ZKey,
+    LSuper,
+    RSuper,
     Numpad0Key,
     Numpad1Key,
     Numpad2Key,
@@ -101,6 +106,22 @@ pub enum KeybdKey {
     RShiftKey,
     LControlKey,
     RControlKey,
+    LAltKey,
+    RAltKey,
+
+    BrowserBackKey,
+    BrowserForwardKey,
+    BrowserRefreshKey,
+
+    VolumeMuteKey,
+    VolumeDownKey,
+    VolumeUpKey,
+
+    MediaNextTrackKey,
+    MediaPrevTrackKey,
+    MediaStopKey,
+    MediaPlayPauseKey,
+
     BackquoteKey,
     SlashKey,
     BackslashKey,
@@ -157,7 +178,7 @@ impl KeybdKey {
 
     pub fn bind_all<F: Fn(KeybdKey) + Send + Sync + Clone + 'static>(callback: F) {
         for key in KeybdKey::iter() {
-            let c2 = callback.clone();
+            let callback = callback.clone();
             let fire = move || {
                 c2(key);
             };
@@ -198,7 +219,7 @@ impl MouseButton {
 
     pub fn bind_all<F: Fn(MouseButton) + Send + Sync + Clone + 'static>(callback: F) {
         for btn in MouseButton::iter() {
-            let c2 = callback.clone();
+            let callback = callback.clone();
             let fire = move || {
                 c2(btn);
             };
