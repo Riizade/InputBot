@@ -1,6 +1,6 @@
 use crate::common::*;
+use serde::{Deserialize, Serialize};
 use std::{thread::sleep, time::Duration};
-use serde::{Serialize, Deserialize};
 
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
@@ -180,7 +180,7 @@ impl KeybdKey {
         for key in KeybdKey::iter() {
             let callback = callback.clone();
             let fire = move || {
-                c2(key);
+                callback(key);
             };
 
             KEYBD_BINDS
@@ -221,7 +221,7 @@ impl MouseButton {
         for btn in MouseButton::iter() {
             let callback = callback.clone();
             let fire = move || {
-                c2(btn);
+                callback(btn);
             };
 
             MOUSE_BINDS
